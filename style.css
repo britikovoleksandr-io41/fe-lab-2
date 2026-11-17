@@ -1,0 +1,79 @@
+/* ===== Завдання 1: таблиця (варіант 66) ===== */
+:root {
+    --c1: #668f8f; /* #nn8f8f, nn = 66 */
+    --c2: #f5f566; /* #f5f5nn, nn = 66 */
+    --text: #000000; /* контраст: 5.9:1 на --c1 та 18.1:1 на --c2 */
+}
+
+body { font-family: Arial, sans-serif; margin: 20px; }
+
+.variant-table { border-collapse: collapse; table-layout: fixed; width: 640px; }
+.variant-table td {
+    border: 1px solid #333;
+    height: 44px;
+    padding: 6px 10px;
+    text-align: center;
+    color: var(--text);
+}
+.variant-table td { transition: background-color .25s; }
+.r1 { background-color: var(--c1); }
+.r2 { background-color: var(--c2); }
+
+/* при наведенні кольори 1-го та 2-го рядків міняються місцями */
+.variant-table:hover .r1 { background-color: var(--c2); }
+.variant-table:hover .r2 { background-color: var(--c1); }
+
+/* ===== Завдання 2: телефон (варіант 6) ===== */
+.images { display: flex; gap: 60px; flex-wrap: wrap; }
+figure { margin: 0; }
+figcaption { margin-top: 10px; font-weight: bold; }
+
+.phone {
+    position: relative;
+    box-sizing: border-box;
+    width: 245px;
+    height: 432px;
+    background: #d6e3bc;
+    border: 2px solid #000;
+    border-radius: 30px;
+}
+.screen {
+    box-sizing: border-box;
+    width: 205px;
+    height: 217px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+}
+.btn {
+    box-sizing: border-box;
+    width: 43px;
+    height: 34px;
+    background: #3f3151;
+    border: 2px solid #000;
+    border-radius: 50%;
+}
+.screen, .btn { position: absolute; }
+
+/* --- Спосіб 1: position (top / left) --- */
+.pos .screen { left: 18px; top: 15px; }
+.pos .btn:nth-child(3n + 2) { left: 38px; }
+.pos .btn:nth-child(3n + 3) { left: 99px; }
+.pos .btn:nth-child(3n + 4) { left: 159px; }
+.pos .btn:nth-child(-n + 4) { top: 252px; }
+.pos .btn:nth-child(n + 5):nth-child(-n + 7) { top: 304px; }
+.pos .btn:nth-child(n + 8) { top: 357px; }
+
+/* --- Спосіб 2: transform (усі елементи в одній точці 0,0 і зсунуті translate) --- */
+.tr .screen, .tr .btn { top: 0; left: 0; }
+.tr .screen { transform: translate(18px, 15px); }
+.tr .btn:nth-child(3n + 2) { transform: translate(38px, var(--y)); }
+.tr .btn:nth-child(3n + 3) { transform: translate(99px, var(--y)); }
+.tr .btn:nth-child(3n + 4) { transform: translate(159px, var(--y)); }
+.tr .btn:nth-child(-n + 4) { --y: 252px; }
+.tr .btn:nth-child(n + 5):nth-child(-n + 7) { --y: 304px; }
+.tr .btn:nth-child(n + 8) { --y: 357px; }
